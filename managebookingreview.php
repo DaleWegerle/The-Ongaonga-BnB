@@ -69,7 +69,7 @@ if (isset($_POST['submit']) and !empty($_POST['submit'])
         mysqli_stmt_close($stmt);    
         //echo "<h2>Member details updated.</h2>";     
         //Header Redirect
-        header('Location: http://localhost/bit608/bnb/managebooking.php', true, 301);
+        header('Location: http://localhost/bit608/bnb/The-Ongaonga-BnB/managebooking.php', true, 301);
         die();
         
     } else { 

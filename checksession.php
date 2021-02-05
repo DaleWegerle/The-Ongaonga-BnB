@@ -9,7 +9,7 @@ function checkUser() {
        return TRUE;
     else {
        $_SESSION['URI'] = 'http://localhost'.$_SERVER['REQUEST_URI']; //save current url for redirect     
-       header('Location: http://localhost/bit608/bnb/login.php', true, 303);       
+       header('Location: http://localhost/bit608/bnb/The-Ongaonga-BnB/login.php', true, 303);       
     }       
 }
  
@@ -28,7 +28,7 @@ function login($id,$username) {
    if ($_SESSION['loggedin'] == 0 and !empty($_SESSION['URI']))        
         $uri = $_SESSION['URI'];          
    else { 
-     $_SESSION['URI'] =  'http://localhost/bit608/bnb/index.php';         
+     $_SESSION['URI'] =  'http://localhost/bit608/bnb/The-Ongaonga-BnB/index.php';         
      $uri = $_SESSION['URI'];           
    }  
    
@@ -45,6 +45,6 @@ function logout(){
   $_SESSION['userid'] = -1;        
   $_SESSION['username'] = '';
   $_SESSION['URI'] = '';
-  header('Location: http://localhost/bit608/bnb/login.php', true, 303);    
+  header('Location: http://localhost/bit608/bnb/The-Ongaonga-BnB/login.php', true, 303);    
 }
 ?>
