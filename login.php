@@ -1,7 +1,7 @@
 <?php
 
 include "header.php";
-include "bookingmenu.php";
+include "loginmenu.php";
 echo '<div id="site_content">';
 echo '<div id="content">';
 
@@ -37,7 +37,7 @@ if (isset($_POST['login']) and !empty($_POST['login']) and ($_POST['login'] == '
        
 //This should be done with prepared statements!!
     if ($error == 0) {
-        $query = "SELECT customerID,password FROM bnb.customer WHERE username = '$username'";
+        $query =  $query = "SELECT customerID,password,role FROM bit608.customer WHERE username = '$username'";;
         $result = mysqli_query($DBC,$query);     
         if (mysqli_num_rows($result) == 1) { //found the user
             $row = mysqli_fetch_assoc($result);
@@ -48,7 +48,7 @@ if (isset($_POST['login']) and !empty($_POST['login']) and ($_POST['login'] == '
   //this line would be used if our user password was stored as a hashed password
            //if (password_verify($password, $row['password'])) {           
             if ($password === $row['password']) //using plaintext for demonstration only!            
-              login($row['customerID'],$username);
+            login($row['customerID'],$username,$row['role']);
         } echo "<h2>Login fail</h2>".PHP_EOL;   
     } else { 
       echo "<h2>$msg</h2>".PHP_EOL;

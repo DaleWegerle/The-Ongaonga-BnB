@@ -5,6 +5,10 @@ echo '<div id="site_content">';
 
 echo '<div id="content">';
 
+include "checksession.php";
+checkUser();
+loginStatus(); 
+
 
 include "config.php"; //load in any variables
 $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
@@ -22,7 +26,8 @@ $result = mysqli_query($DBC,$query);
 $rowcount = mysqli_num_rows($result); 
 ?>
 <h1><strong>Room list</strong></h1>
-<h2><a href='addroom.php'>[Add a room]</a><a href="/bnb/">[Return to main page]</a></h2>
+<h2><a href="addroom.php" style="padding-right: 20px;">[Add a room]</a>
+<a href="index.php">[Return to home page]</a></h2>
 <table border="1" style="width: 100%;">
 <thead><tr><th>Room Name</th><th>Type</th><th>Action</th></tr></thead>
 <?php
@@ -32,9 +37,8 @@ if ($rowcount > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
 	  $id = $row['roomID'];	
 	  echo '<tr><td>'.$row['roomname'].'</td><td>'.$row['roomtype'].'</td>';
-	  echo     '<td><a href="viewroom.php?id='.$id.'">[view]</a>';
+	  echo     '<td><a href="viewroom.php?id='.$id.'">[view/delete]</a>';
 	  echo         '<a href="editroom.php?id='.$id.'">[edit]</a>';
-	  echo         '<a href="deleteroom.php?id='.$id.'">[delete]</a></td>';
       echo '</tr>'.PHP_EOL;
    }
 } else echo "<h2>No rooms found!</h2>"; //suitable feedback

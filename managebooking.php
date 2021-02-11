@@ -8,7 +8,7 @@ echo '<div id="site_content">';
 echo '<div id="content" style="width: 100%">';
 
 include "checksession.php";
-checkUser();
+checkUser(AC_ADMIN);
 loginStatus(); 
 error_reporting(0);
 
