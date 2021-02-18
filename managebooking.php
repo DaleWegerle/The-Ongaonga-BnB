@@ -7,10 +7,11 @@ include "managebookingsmenu.php";
 echo '<div id="site_content">';
 echo '<div id="content" style="width: 100%">';
 
+
 include "checksession.php";
-checkUser(AC_ADMIN);
+checkUser();
 loginStatus(); 
-error_reporting(0);
+//error_reporting(0);
 
 
 ?>
@@ -19,14 +20,14 @@ error_reporting(0);
 <body>
 <?php
 include "config.php"; //load in any variables
-$DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
+$DBC = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBDATABASE) or die();
  
 if (mysqli_connect_errno()) {
     echo "Error: Unable to connect to MySQL. ".mysqli_connect_error() ;
     exit;
 }
  
-$query = 'SELECT bookingID,roomID,roomdetails,customerdetails,checkin,checkout,review FROM bnb.bookings ORDER BY bookingID';
+$query = 'SELECT bookingID,roomID,roomdetails,customerdetails,checkin,checkout,review FROM unaux_27944105_bnb.bookings ORDER BY bookingID';
 $result = mysqli_query($DBC,$query);
 $rowcount = mysqli_num_rows($result); 
 

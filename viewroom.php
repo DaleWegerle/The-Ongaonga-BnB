@@ -11,7 +11,7 @@ error_reporting(0);
  
 <?php
 include "config.php"; //load in any variables
-$DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
+$DBC = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBDATABASE) or die();
  
 
 if (mysqli_connect_errno()) {
@@ -53,7 +53,7 @@ if (isset($_POST['submit']) and !empty($_POST['submit'])
     
 //save the member data if the error flag is still clear and member id is > 0
     if ($error == 0 and $id > 0) {
-        $query = "DELETE FROM bnb.room WHERE roomID=?";
+        $query = "DELETE FROM unaux_27944105_bnb.room WHERE roomID=?";
         $stmt = mysqli_prepare($DBC,$query); //prepare the query
         mysqli_stmt_bind_param($stmt,'i', $id); 
         mysqli_stmt_execute($stmt);
@@ -68,7 +68,7 @@ if (isset($_POST['submit']) and !empty($_POST['submit'])
 //prepare a query and send it to the server
 //NOTE for simplicity purposes ONLY we are not using prepared queries
 //make sure you ALWAYS use prepared queries when creating custom SQL like below
-$query = 'SELECT * FROM bnb.room WHERE roomID='.$id;
+$query = 'SELECT * FROM unaux_27944105_bnb.room WHERE roomID='.$id;
 $result = mysqli_query($DBC,$query);
 $rowcount = mysqli_num_rows($result); 
 ?>

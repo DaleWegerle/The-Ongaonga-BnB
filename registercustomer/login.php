@@ -8,7 +8,7 @@ echo '<div id="content">';
 //this line is for debugging purposes so that we can see the actual POST data
 //echo "<pre>"; var_dump($_POST); echo "</pre>";
  
-include "checksession.php";
+include "checksessionroles.php";
 loginStatus(); //show the current login status
 //echo "<pre>"; var_dump($_SESSION); echo "</pre>";
 error_reporting(0);
@@ -17,7 +17,7 @@ if (isset($_POST['logout'])) logout();
  
 if (isset($_POST['login']) and !empty($_POST['login']) and ($_POST['login'] == 'Login')) {
     include "config.php"; //load in any variables
-    $DBC = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBDATABASE) or die();
+    $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE) or die();
  
 //validate incoming data - only the first field is done for you in this example - rest is up to you to do
 //firstname
@@ -37,7 +37,7 @@ if (isset($_POST['login']) and !empty($_POST['login']) and ($_POST['login'] == '
        
 //This should be done with prepared statements!!
     if ($error == 0) {
-        $query =  $query = "SELECT customerID,password,role FROM unaux_27944105_bnb.customer WHERE username = '$username'";;
+      $query = "SELECT memberID,password,role FROM bnb.member WHERE username = '$username'";
         $result = mysqli_query($DBC,$query);     
         if (mysqli_num_rows($result) == 1) { //found the user
             $row = mysqli_fetch_assoc($result);
@@ -48,7 +48,7 @@ if (isset($_POST['login']) and !empty($_POST['login']) and ($_POST['login'] == '
   //this line would be used if our user password was stored as a hashed password
            //if (password_verify($password, $row['password'])) {           
             if ($password === $row['password']) //using plaintext for demonstration only!            
-            login($row['customerID'],$username,$row['role']);
+            login($row['memberID'],$username,$row['role']);
         } echo "<h2>Login fail</h2>".PHP_EOL;   
     } else { 
       echo "<h2>$msg</h2>".PHP_EOL;

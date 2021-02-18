@@ -1,6 +1,8 @@
 <?php
 
 include "config.php"; //load in any variables
+include 'ChromePhp.php';
+
 $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE) or die();
 
 $searchresult = "";
@@ -19,6 +21,10 @@ if (isset($start) and !empty($start) and strlen($start) == 10 and isset($end) an
         $searchresult = '<table border="1"><thead><tr><th>ROOM ID</th><th>ROOM NAME</th><th>DISCRIPTION</th><th>ROOM TYPE</th><th>BEDS</th><th>ACTION</th></tr></thead>';
         while ($row = mysqli_fetch_assoc($result)) {
             $id = $row['roomID'];	
+            ChromePhp::log($start);
+            ChromePhp::log($end);
+            ChromePhp::log($row['roomID']);
+            
             $searchresult .= '<tr><td>'.$row['roomID'].'</td><td>'.$row['roomname'].'</td><td>'.$row['description'].'</td><td>'.$row['roomtype'].'</td><td>'.$row['beds'].'</td>';
             $searchresult .= '<td><a href="bookroom.php?id='.$id.'&start='.$start.'&end='.$end.'">[book now]</a>';
             $searchresult .= '</tr>'.PHP_EOL;

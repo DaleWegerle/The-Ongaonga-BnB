@@ -1,8 +1,6 @@
 <?php
  session_start();
  define(AC_ADMIN,9);
- define(AC_MANAGER,8);
- define(AC_AUTHENTICATED,4);
  define(AC_GUEST,0);
  //function to check if the user is logged else send to the login page 
  function checkUser($acl = 0) {
@@ -35,7 +33,7 @@
     if ($_SESSION['loggedin'] == 0 and !empty($_SESSION['URI']))        
          $uri = $_SESSION['URI'];          
     else { 
-      $_SESSION['URI'] =  'http://localhost/bit608//bnb/The-Ongaonga-BnB/managebooking.php';         
+      $_SESSION['URI'] =  'http://localhost/bit608/bnb/The-Ongaonga-BnB/managebooking.php';         
       $uri = $_SESSION['URI'];           
     }  
     
@@ -53,6 +51,6 @@
    $_SESSION['userid'] = -1;        
    $_SESSION['username'] = '';
    $_SESSION['URI'] = '';
-   header('Location: http://localhost/bit608//bnb/The-Ongaonga-BnB/login.php', true, 303);    
+   header('Location: http://localhost/bit608/bnb/The-Ongaonga-BnB/login.php', true, 303);    
  }
  ?>

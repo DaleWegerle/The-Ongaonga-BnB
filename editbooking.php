@@ -12,7 +12,7 @@ echo '<div id="content">';
  <body>
  <?php
 include "config.php"; //load in any variables
-$DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
+$DBC = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBDATABASE) or die();
  
 if (mysqli_connect_errno()) {
   echo "Error: Unable to connect to MySQL. ".mysqli_connect_error() ;
@@ -65,14 +65,14 @@ if (isset($_POST['submit']) and !empty($_POST['submit'])
     
 //save the member data if the error flag is still clear and member id is > 0
     if ($error == 0 and $id > 0) {
-        $query = "UPDATE bnb.bookings SET roomID=?,roomdetails=?,customerdetails=?,checkin=?,checkout=? WHERE bookingID=?";
+        $query = "UPDATE unaux_27944105_bnb.bookings SET roomID=?,roomdetails=?,customerdetails=?,checkin=?,checkout=? WHERE bookingID=?";
         $stmt = mysqli_prepare($DBC,$query); //prepare the query
         mysqli_stmt_bind_param($stmt,'sssssi',$roomID, $roomdetails,$customerdetails,$checkin,$checkout,$id); 
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);    
         //echo "<h2>Member details updated.</h2>";     
         //Header Redirect
-        header('Location: http://localhost/bit608/bnb/The-Ongaonga-BnB/managebooking.php', true, 301);
+        header('Location: http://ongaona.unaux.com/managebooking.php', true, 301);
         die();
         
     } else { 
@@ -82,7 +82,7 @@ if (isset($_POST['submit']) and !empty($_POST['submit'])
 }
 //locate the member to edit by using the memberID
 //we also include the member ID in our form for sending it back for saving the data
-$query = 'SELECT roomID,roomdetails,customerdetails,checkin,checkout FROM bnb.bookings WHERE bookingID='.$id;
+$query = 'SELECT roomID,roomdetails,customerdetails,checkin,checkout FROM unaux_27944105_bnb.bookings WHERE bookingID='.$id;
 $result = mysqli_query($DBC,$query);
 $rowcount = mysqli_num_rows($result);
 if ($rowcount > 0) {

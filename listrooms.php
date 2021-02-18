@@ -11,7 +11,7 @@ loginStatus();
 
 
 include "config.php"; //load in any variables
-$DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
+$DBC = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBDATABASE) or die();
 
 //insert DB code from here onwards
 //check if the connection was good
@@ -21,7 +21,7 @@ if (mysqli_connect_errno()) {
 }
 
 //prepare a query and send it to the server
-$query = 'SELECT roomID,roomname,roomtype FROM room ORDER BY roomtype';
+$query = 'SELECT roomID,roomname,roomtype FROM unaux_27944105_bnb.room ORDER BY roomtype';
 $result = mysqli_query($DBC,$query);
 $rowcount = mysqli_num_rows($result); 
 ?>

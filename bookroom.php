@@ -34,7 +34,7 @@ echo '<div id="content">';
 
 
 include "config.php"; //load in any variables
-$DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
+$DBC = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBDATABASE) or die();
  
 if (mysqli_connect_errno()) {
   echo "Error: Unable to connect to MySQL. ".mysqli_connect_error() ;
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
    if (isset($_POST['submit']) and !empty($_POST['submit']) and ($_POST['submit'] == 'Book')) {
     //if ($_SERVER["REQUEST_METHOD"] == "POST") { //alternative simpler POST test    
         include "config.php"; //load in any variables
-        $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
+        $DBC = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBDATABASE) or die();
      
         if (mysqli_connect_errno()) {
             echo "Error: Unable to connect to MySQL. ".mysqli_connect_error() ;
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     //save the member data if the error flag is still clear
             $error = 0;
         if ($error == 0) {
-            $query = "INSERT INTO bnb.bookings (roomID,customerdetails,roomdetails,checkin,checkout) VALUES (?,?,?,?,?)";
+            $query = "INSERT INTO unaux_27944105_bnb.bookings (roomID,customerdetails,roomdetails,checkin,checkout) VALUES (?,?,?,?,?)";
             $stmt = mysqli_prepare($DBC,$query); //prepare the query
             mysqli_stmt_bind_param($stmt,'sssss',$roomID,$customerdetails,$roomdetails,$checkin,$checkout); 
             mysqli_stmt_execute($stmt);
@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
 //locate the member to edit by using the memberID
 //we also include the member ID in our form for sending it back for saving the data
-$query = 'SELECT roomname,description,roomtype,beds FROM bnb.room WHERE roomID='.$id;
+$query = 'SELECT roomname,description,roomtype,beds FROM unaux_27944105_bnb.room WHERE roomID='.$id;
 $result = mysqli_query($DBC,$query);
 $rowcount = mysqli_num_rows($result);
 if ($rowcount > 0) {

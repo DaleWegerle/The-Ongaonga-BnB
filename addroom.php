@@ -15,7 +15,7 @@ echo '<div id="content">';
 
 
 include "config.php"; //load in any variables
-$DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
+$DBC = mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBDATABASE) or die();
  
 if (mysqli_connect_errno()) {
   echo "Error: Unable to connect to MySQL. ".mysqli_connect_error() ;
@@ -44,7 +44,7 @@ error_reporting(0);
         if (mysqli_connect_errno()) {
             echo "Error: Unable to connect to MySQL. ".mysqli_connect_error() ;
             exit; //stop processing the page further
-            header('Location: http://localhost/bit608/bnb/The-Ongaonga-BnB/listrooms.php', true, 301);
+            header('Location: http://ongaona.unaux.com/listrooms.php', true, 301);
         };
 
        
@@ -80,7 +80,7 @@ error_reporting(0);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);    
             echo "<h2>Your Room Has Been Booked! See You Soon!</h2>";
-            header('Location: http://localhost/bit608/bnb/The-Ongaonga-BnB/listrooms.php', true, 301);        
+            header('Location: http://ongaona.unaux.com/listrooms.php', true, 301);        
         } 
         mysqli_close($DBC); //close the connection once done
     }
